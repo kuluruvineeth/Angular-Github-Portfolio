@@ -1,10 +1,29 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Title } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'gh-portfolio';
+export class AppComponent implements OnInit {
+  username = environment.username;
+
+  constructor(private title: Title,private meta: Meta) {}
+
+  ngOnInit(){
+    this.title.setTitle('GitHub portfolio app');
+    this.meta.addTags([
+      {
+        name:'description',
+        content: `${this.username}'s Github portfolio'`
+      },
+      {
+        name: 'author',
+        content: this.username
+      }
+    ]);
+  }
 }
